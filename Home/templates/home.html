@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+{% extends "layout/base.html" %}
+{% block homeblock %}
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>EHR - Landing Page</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'images/ehr_logo.png' %}" />
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation with Logo -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <!-- Logo Image -->
+                <img src="{% static 'images/ehr_logo.png' %}" alt="EHR Logo" width="50" height="50" class="me-2">
+                <span class="fw-bold text-primary">EHR System</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead bg-dark text-white text-center py-5">
+        <div class="container">
+            <img src="{% static 'images/ehr_logo.png' %}" alt="EHR Logo" class="mb-4" width="120">
+            <h1 class="mb-3">Welcome to the Electronic Health Record (EHR) System</h1>
+            <p class="lead mb-4">Your health records, simplified and secure</p>
+            
+        </div>
+    </header>
+
+    <!-- Keep the rest of your sections (features, showcases, testimonials, etc.) here -->
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
+

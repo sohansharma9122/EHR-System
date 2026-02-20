@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #d6eaff, #8ec5fc);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 35px;
+    width: 90%;
+    max-width: 430px;
+    text-align: center;
+    border-radius: 22px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    backdrop-filter: blur(15px);
+    animation: fadeSlide 0.8s ease;
+  }
+
+  .container img {
+    width: 90px;
+    animation: bounce 2s infinite ease-in-out;
+  }
+
+  h1 {
+    margin-top: 15px;
+    font-size: 28px;
+    color: #1e3a8a;
+    font-weight: bold;
+  }
+
+  p {
+    color: #555;
+    font-size: 16px;
+    margin: 15px 0 25px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: #1e3a8a;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    font-weight: bold;
+  }
+
+  .btn:hover {
+    background: #14316a;
+    transform: translateY(-3px);
+  }
+
+  @keyframes fadeSlide {
+    0% { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 24px; }
+    .container img { width: 75px; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <img src="https://cdn-icons-png.flaticon.com/512/3209/3209265.png" alt="Doctor Icon">
+
+  <h1>👨‍⚕️ Welcome Doctor</h1>
+
+  <p>
+    You have successfully logged in.<br>
+    Manage patients, prescriptions & reports easily.
+  </p>
+
+  <a href="{% url 'Pviewdata' %}" class="btn">📋 View Patient Records</a>
+</div>
+
+</body>
+</html>

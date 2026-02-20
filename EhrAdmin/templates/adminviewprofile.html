@@ -1,0 +1,32 @@
+
+{% extends "alayout/base.html" %}
+{% block adminblock %}
+{% load static %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 rounded-4">
+        <h3 class="text-center mb-4">User Profile</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle">
+                <tr>
+                    <th class="bg-light text-center">Image</th>
+                    <td class="text-center">
+                        <img src="{{data1.Image.url}}" alt="Profile Image" class="img-thumbnail rounded" style="max-width:120px;">
+                    </td>
+                </tr>
+                <tr><th class="bg-light">Name</th><td>{{data.Name}}</td></tr>
+                <tr><th class="bg-light">Email</th><td>{{data.Email}}</td></tr>
+                <tr><th class="bg-light">Password</th><td>{{data.Password}}</td></tr>
+                <tr><th class="bg-light">Gender</th><td>{{data.Gender}}</td></tr>
+                <tr><th class="bg-light">DOB</th><td>{{data.DOB}}</td></tr>
+                <tr><th class="bg-light">Mobile</th><td>{{data.Mobile}}</td></tr>
+                <tr><th class="bg-light">Address</th><td>{{data.Address}}</td></tr>
+                <tr><th class="bg-light">Role</th><td>{{data.Role_Name}}</td></tr>
+                <tr>
+                    <th class="bg-light">Document</th>
+                    <td><a href="{{data1.Document.url}}" class="btn btn-sm btn-primary">Download</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

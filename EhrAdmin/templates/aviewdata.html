@@ -1,0 +1,159 @@
+{% extends "alayout/base.html" %}
+{% block adminblock %}
+{% load static %}
+
+<style>
+.page-title {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    color: #0d47a1;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+/* Card/Table Container */
+.card-custom {
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* Table Head */
+.table thead th {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    border: none;
+    padding: 12px;
+}
+
+/* Table Row */
+.table tbody tr {
+    background: #ffffff;
+    transition: 0.25s ease-in-out;
+}
+.table tbody tr:hover {
+    background: #eef4ff;
+    transform: scale(1.01);
+}
+
+/* Buttons */
+.btn-action {
+    border-radius: 8px;
+    font-size: 12px;
+    padding: 6px 12px;
+}
+.btn-warning {
+    background: #fbc02d;
+    color: #000;
+    border: none;
+}
+.btn-warning:hover {
+    background: #e6ad12;
+}
+.btn-danger {
+    background: #e53935;
+    border: none;
+}
+.btn-danger:hover {
+    background: #c62828;
+}
+
+/* Badge */
+.badge {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* Mobile Responsive Table */
+@media (max-width: 768px) {
+    .table thead { display: none; }
+    .table tbody tr {
+        display: block;
+        margin-bottom: 18px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+    .table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+    .table tbody td:last-child {
+        border-bottom: none;
+    }
+}
+</style>
+
+
+<div class="container my-4">
+    <h2 class="page-title">👥 Registered Users</h2>
+
+    <div class="card card-custom">
+        <div class="table-responsive">
+            <table class="table align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Reg ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Gender</th>
+                        <th>DOB</th>
+                        <th>Role</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in data %}
+                    <tr>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <td><b>{{user.reg_id}}</b></td>
+                            <td>{{user.Name}}</td>
+                            <td>{{user.Email}}</td>
+                            <td>{{user.Mobile}}</td>
+                            <td>{{user.Gender}}</td>
+                            <td>{{user.DOB}}</td>
+                            <td>{{user.Role_Name}}</td>
+                            <td>{{user.Address}}</td>
+
+                            <td>
+                                {% if user.Status == "Active" %}
+                                    <span class="badge bg-success">Active</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Inactive</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <input type="email" name="email" value="{{user.Email}}" hidden>
+
+                                <button type="submit" name="btn" value="edit"
+                                    class="btn btn-warning btn-action">✏ Edit</button>
+
+                                <button type="submit" name="btn" value="delete"
+                                    class="btn btn-danger btn-action">🗑 Delete</button>
+                            </td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

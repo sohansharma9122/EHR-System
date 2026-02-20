@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            padding: 28px;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+
+        .header {
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1e90ff;
+        }
+
+        .header h2 {
+            margin: 0;
+            color: #1e90ff;
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .hospital-info {
+            font-size: 12px;
+            margin-top: 8px;
+            color: #5a5a5a;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 8px;
+            color: #1e90ff;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .info-box {
+            background: #f9fbff;
+            padding: 12px 15px;
+            border: 1px solid #e0e8f8;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            margin: 4px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid #d7e2f2;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e8f2ff;
+            font-weight: 600;
+        }
+
+        tr:last-child th {
+            background: #d1e8ff;
+            font-size: 15px;
+        }
+
+        .footer {
+            margin-top: 35px;
+            font-size: 11px;
+            color: #636e72;
+            text-align: center;
+            border-top: 1px solid #dcdcdc;
+            padding-top: 10px;
+        }
+
+        .signature-box {
+            float: right;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .signature-box img {
+            margin-top: -8px;
+        }
+
+        .qr {
+            float: left;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .digital {
+            font-size: 10px;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <h2>EHR DIGITAL LAB</h2>
+    <div class="hospital-info">
+        Bhubaneswar, Odisha · +91-XXXXXXXXXX · www.ehrlab.com<br>
+        NABL & ISO Certified Clinical Diagnostics Laboratory
+    </div>
+</div>
+
+<!-- Patient Details -->
+<div class="section-title">Patient Details</div>
+<div class="info-box">
+    <p><strong>Name:</strong> {{ report.patient.Name }}</p>
+    <p><strong>Report ID:</strong> LAB-{{ report.report_id }}</p>
+    <p><strong>Date:</strong> {{ report.created_at|date:"d M Y, h:i A" }}</p>
+</div>
+
+<!-- Test Details -->
+<div class="section-title">Test Details</div>
+<table>
+    <tr>
+        <th>Test Name</th>
+        <th>Price (₹)</th>
+    </tr>
+    {% for t in report.tests.all %}
+    <tr>
+        <td>{{ t.test_name }}</td>
+        <td>{{ t.test_Price }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <th>Total Amount</th>
+        <th>₹{{ report.total_price }}</th>
+    </tr>
+</table>
+
+<!-- QR + Signature -->
+<div class="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=85x85&data=Verified Report: LAB-{{ report.report_id }}">
+    <div class="digital">Scan to verify</div>
+</div>
+
+<div class="signature-box">
+    <p style="margin-bottom:2px;">Authorized By</p>
+    <img src="https://i.ibb.co/zJ3m0pX/signature.png" width="130">
+    <p><strong>Dr. A. Kumar</strong><br><span style="font-size:12px;">MD, Pathology</span></p>
+</div>
+
+<div style="clear:both;"></div>
+
+<!-- Footer -->
+<div class="footer">
+    ✔ This is a digitally verified pathology report  
+    ✔ Valid only after secure online payment  
+</div>
+
+</body>
+</html>

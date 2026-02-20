@@ -1,0 +1,187 @@
+
+
+{% extends "layout/base.html" %}
+{% block homeblock %}
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About EHR System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+
+        /* Background */
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)), 
+                        url('{% static "images/about_bg.jpg" %}') no-repeat center center/cover;
+            min-height: 100vh;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Glassmorphism overlay */
+        .overlay {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 50px 30px;
+            border-radius: 20px;
+            margin-top: 50px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        h1, h2 {
+            color: #fff;
+        }
+
+        /* Role cards */
+        .role-card {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            color: #fff;
+        }
+
+        .role-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .role-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .role-card li::before {
+            content: "\f058"; /* Bootstrap check icon */
+            font-family: "Bootstrap Icons";
+            padding-right: 8px;
+            color: #ffd700;
+        }
+
+        /* About developer */
+        .about-dev {
+            background: rgba(0,0,0,0.4);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+
+        /* Animation for text */
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {opacity: 0; transform: translateY(20px);}
+            100% {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="container overlay fade-in">
+        <!-- Introduction -->
+        <div class="text-center mb-5">
+            <h1 class="fw-bold">Introduction to EHR</h1>
+            <p class="lead">
+                An Electronic Health Record (EHR) system is a digital platform that stores, manages, and secures patient health information. 
+                Our EHR system is designed to streamline healthcare processes, making patient data easily accessible for authorized users while ensuring privacy and security.
+            </p>
+        </div>
+
+        <!-- Purpose / Goals -->
+        <div class="mb-5">
+            <h2 class="fw-semibold mb-3">Purpose / Goals</h2>
+            <ul class="ps-3">
+                <li>Provide a centralized system for managing patient records, appointments, and prescriptions.</li>
+                <li>Improve efficiency for doctors, staff, and patients.</li>
+                <li>Generate bills, lab reports, and prescriptions automatically.</li>
+                <li>Allow easy monitoring and management of hospital workflows.</li>
+            </ul>
+        </div>
+
+        <!-- Key Features -->
+        <div class="mb-5">
+            <h2 class="fw-semibold mb-4">Key Features by Role</h2>
+            <div class="row g-4">
+                <!-- Admin -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card role-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary"><i class="bi bi-shield-lock-fill me-2"></i>Admin</h5>
+                            <ul>
+                                <li>Manage profile and view all user data</li>
+                                <li>Edit or delete records</li>
+                                <li>Generate bills</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Doctor -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card role-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-success"><i class="bi bi-person-badge-fill me-2"></i>Doctor</h5>
+                            <ul>
+                                <li>View and update patient details</li>
+                                <li>Approve or decline appointments</li>
+                                <li>Add prescriptions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Patient -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card role-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-warning"><i class="bi bi-person-heart me-2"></i>Patient</h5>
+                            <ul>
+                                <li>Manage profile</li>
+                                <li>View doctor information</li>
+                                <li>Book and check appointments</li>
+                                <li>View bills</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- Staff -->
+                <div class="col-md-6 col-lg-3">
+                    <div class="card role-card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger"><i class="bi bi-person-lines-fill me-2"></i>Staff</h5>
+                            <ul>
+                                <li>Manage profile</li>
+                                <li>View doctor and patient details</li>
+                                <li>Add lab tests and prices</li>
+                                <li>Generate lab test reports</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Developer -->
+        <div class="text-center about-dev">
+            <h2 class="fw-semibold mb-3">About the Developer</h2>
+            <p>
+                Developed by <strong>Sohan Sharma</strong>, a B.Tech student in Computer Science. 
+                This project is part of a practical learning initiative aimed at improving healthcare management through technology.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+{% endblock %}

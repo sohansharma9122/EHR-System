@@ -1,0 +1,172 @@
+{% extends "dlayout/base.html" %}
+{% block doctorblock %}
+{% load static %}
+
+<style>
+/* Page Title */
+.page-title {
+    font-size: 30px;
+    font-weight: 800;
+    text-align: center;
+    color: #0d47a1;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+/* Card */
+.card-custom {
+    border-radius: 16px;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+/* Table Heading */
+.appointment-table thead th {
+    background: linear-gradient(45deg, #007bff, #004aad);
+    color: white;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* Row Styling */
+.appointment-table tbody tr {
+    background: white;
+    transition: .25s;
+}
+.appointment-table tbody tr:hover {
+    background: #eaf3ff;
+    transform: scale(1.01);
+}
+
+/* Buttons */
+.btn-action {
+    border-radius: 10px;
+    font-size: 13px;
+    padding: 5px 12px;
+    margin: 1px;
+}
+
+/* Status Pills */
+.badge {
+    padding: 6px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+/* View button eye icon */
+.eye-icon {
+    font-size: 14px;
+}
+
+/* Responsive fixes */
+@media (max-width: 768px) {
+    .appointment-table thead {
+        display: none; 
+    }
+    .appointment-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+    .appointment-table tbody tr {
+        display: block;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
+    .btn-action {
+        width: 48%;
+        margin-bottom: 5px;
+    }
+}
+</style>
+
+<div class="container my-4">
+
+    <h2 class="page-title">📅 Doctor Appointments</h2>
+
+    {% if appointments %}
+    <div class="card card-custom">
+        <div class="card-header text-white text-center" style="background:#0059ff;">
+            <h5 class="mb-0 fw-bold">Your Scheduled Appointments</h5>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table appointment-table text-center">
+                <thead>
+                    <tr>
+                        <th>Patient</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>Disease</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td><b>{{ appointment.p_name }}</b></td>
+                        <td>{{ appointment.p_mobile }}</td>
+                        <td>{{ appointment.p_address }}</td>
+                        <td>{{ appointment.p_gender }}</td>
+                        <td>{{ appointment.p_disease }}</td>
+                        <td>{{ appointment.todaydate }}</td>
+                        <td>{{ appointment.fromTime }} - {{ appointment.totime }}</td>
+                        <td>
+                            {% if appointment.status == "Pending" %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif appointment.status == "Approved" %}
+                                <span class="badge bg-success text-white">Approved</span>
+                            {% else %}
+                                <span class="badge bg-danger text-white">Cancelled</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if appointment.status == "Pending" %}
+                            <form action="{% url 'approve_appointment' %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="appointment_id" value="{{ appointment.id }}">
+                                <button class="btn btn-success btn-action">✔ Approve</button>
+                            </form>
+                            {% endif %}
+
+                            <form action="{% url 'cancel_appointment' %}" method="POST" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="appointment_id" value="{{ appointment.id }}">
+                                <button class="btn btn-danger btn-action">✖ Cancel</button>
+                            </form>
+
+                            <form method="post" action="{% url 'viewdetails' %}" style="display:inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="pid" value="{{ appointment.id }}">
+                                <button type="submit" name="btn" value="ViewDetails" class="btn btn-info btn-action text-white">
+                                    <span class="eye-icon">👁</span> View
+                                </button>
+                            </form>
+
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="alert alert-info text-center mt-4">🚫 No Appointments Found</div>
+    {% endif %}
+</div>
+
+{% endblock %}

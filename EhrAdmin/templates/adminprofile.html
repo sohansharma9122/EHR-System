@@ -1,0 +1,122 @@
+{% extends "alayout/base.html" %}
+{% block adminblock %}
+{% load static %}
+
+<style>
+.form-card {
+    max-width: 850px;
+    background: #ffffffee;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 30px auto;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    backdrop-filter: blur(8px);
+    border: 1px solid #e5e9ff;
+}
+
+.form-title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    color: #0d47a1;
+    margin-bottom: 25px;
+}
+
+/* 2-column layout */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* Input style */
+.form-control, .form-select, textarea {
+    border-radius: 10px !important;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+}
+
+.form-control:focus, .form-select:focus, textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 8px rgba(106,17,203,0.3);
+}
+
+/* Mobile view */
+@media(max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+
+<form method="post" enctype="multipart/form-data"
+      action="{% url 'adminprofile' %}" 
+      class="form-card">
+
+    {% csrf_token %}
+
+    <h3 class="form-title">👤 Admin Profile</h3>
+
+    <div class="form-grid">
+
+        <div>
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" value="{{adata.Name}}">
+        </div>
+
+        <div>
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" name="email" value="{{adata.Email}}">
+        </div>
+
+        <div>
+            <label class="form-label">Mobile</label>
+            <input type="text" class="form-control" name="mobile" value="{{adata.Mobile}}">
+        </div>
+
+        <div>
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" name="pwd" value="{{adata.Password}}">
+        </div>
+
+        <div>
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" name="dob" value="{{adata.DOB|date:'Y-m-d'}}">
+        </div>
+
+        <div>
+            <label class="form-label">Gender</label>
+            <select class="form-select" name="gender">
+                <option value="Male" {% if adata.Gender == "Male" %}selected{% endif %}>Male</option>
+                <option value="Female" {% if adata.Gender == "Female" %}selected{% endif %}>Female</option>
+                <option value="Other" {% if adata.Gender == "Other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="form-label">Profile Image</label>
+            <input type="file" class="form-control" name="image">
+        </div>
+
+        <div>
+            <label class="form-label">Document</label>
+            <input type="file" class="form-control" name="uploaded_doc">
+        </div>
+
+        <div style="grid-column: span 2;">
+            <label class="form-label">Address</label>
+            <textarea class="form-control" name="ads" rows="2">{{adata.Address}}</textarea>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary px-4 py-2"
+                style="border-radius:10px;font-weight:600;">
+            ✅ Update Profile
+        </button>
+    </div>
+</form>
+
+{% endblock %}

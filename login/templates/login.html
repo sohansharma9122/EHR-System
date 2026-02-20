@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends "alayout/base.html" %}
+{% block adminblock %}
+{% load static %}
+
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+        <h2 class="card-title text-center mb-4">Welcome To Login Page</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Enter email" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" name="pwd" class="form-control" placeholder="Enter password" required>
+            </div>
+            <div class="d-grid">
+                <input type="submit" value="Login" name="btn" class="btn btn-primary">
+            </div>
+        </form>
+        {% if msg %}
+            <p class="text-danger mt-3 text-center">{{ msg }}</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

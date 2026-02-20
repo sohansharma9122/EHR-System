@@ -1,0 +1,80 @@
+{% extends "dlayout/base.html" %}
+{% block doctorblock %}
+{% load static %}
+<style>
+    .prescription-card {
+        max-width: 600px;
+        margin: 40px auto;
+        border-radius: 12px;
+        background: #ffffff;
+        border: none;
+    }
+
+    .patient-header {
+        background: #0d6efd;
+        padding: 15px;
+        color: #fff;
+        border-radius: 10px 10px 0 0;
+        text-align: center;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .patient-info p {
+        margin: 6px 0;
+        font-size: 15px;
+    }
+
+    .patient-info strong {
+        color: #0d6efd;
+    }
+
+    textarea {
+        resize: none;
+        border-radius: 8px !important;
+    }
+
+    .btn-primary {
+        width: 100%;
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+    }
+</style>
+
+
+<div class="card shadow prescription-card">
+
+    <!-- Header -->
+    <div class="patient-header">Patient Prescription Panel</div>
+
+    <div class="card-body">
+
+        <!-- Patient Info -->
+        <div class="patient-info mb-3">
+            <p><strong>Name:</strong> {{ pdata.p_name }}</p>
+            <p><strong>Contact:</strong> {{ pdata.p_mobile }}</p>
+            <p><strong>Gender:</strong> {{ pdata.p_gender }}</p>
+            <p><strong>Disease:</strong> {{ pdata.p_disease }}</p>
+        </div>
+
+        <hr>
+
+        <!-- Prescription Form -->
+        <h5 class="mb-2 text-primary">📝 Add Prescription</h5>
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="pid" value="{{ pdata.id }}">
+
+            <label for="prescription" class="form-label">Enter Prescription</label>
+            <textarea name="prescription" id="prescription" rows="5" class="form-control" placeholder="Write patient prescription here..."></textarea>
+
+            <button type="submit" name="btn" value="submit" class="btn btn-primary mt-3">
+                 Save Prescription
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+
+    
+{% extends "layout/base.html" %}
+{% block homeblock %}
+{% load static %}
+<form method="post" class="container mt-5 p-4 border rounded shadow-sm bg-light">
+    {% csrf_token %}
+
+    <h3 class="mb-4 text-center">Feedback Form</h3>
+
+    <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-control" placeholder="Enter full name" name="name" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" placeholder="abc@gmail.com" name="email" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Mobile No</label>
+        <input type="number" class="form-control" placeholder="Enter Mobile Number" name="mob" required>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Feedback</label>
+        <textarea class="form-control" name="Feedback" rows="3" placeholder="Write your feedback..."></textarea>
+    </div>
+
+    <div class="text-center">
+        <input type="submit" class="btn btn-primary px-4" value="Submit" name="btn">
+    </div>
+</form>
+
+<div class="container mt-3">
+    <p class="text-success fw-bold">{{MSG}}</p>
+</div>
+
+
+
+{% endblock %}

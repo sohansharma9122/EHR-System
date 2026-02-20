@@ -1,0 +1,13 @@
+<form method="post">
+    {% csrf_token %}
+    first number : <input type="text" name="Fno" placeholder="enter first number"><br><br>
+    second number : <input type="text" name="Sno" placeholder="enter second number"><br><br>
+    <input type="submit" value="ADD" name="btn">
+    <input type="submit" value="SUB" name="btn">
+    <input type="submit" value="MUL" name="btn">
+    <input type="submit" value="DIV" name="btn">
+    
+</form>
+{% if cal %}
+<h1> Result is {{cal}}</h1>
+{% endif%}

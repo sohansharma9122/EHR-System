@@ -1,0 +1,17 @@
+{% extends "playout/base.html" %}
+{% block patientblock %}
+{% load static %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm text-center p-4" style="border-radius: 15px; background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white;">
+                <h3 class="mb-3">Welcome, {{PName}}!</h3>
+                <p class="lead">You are now on your Patient Home Page. Explore your dashboard and manage your health efficiently.</p>
+                <a href="{% url 'patient_dashboard' %}" class="btn btn-light mt-3" style="color: #2575fc; font-weight: bold;">Go to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,130 @@
+{% if not report.is_paid %}
+
+<style>
+.payment-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    font-family: "Poppins", sans-serif;
+}
+
+.payment-card {
+    background: #fff;
+    padding: 30px;
+    width: 380px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.payment-card h2 {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #262626;
+}
+
+.payment-card p {
+    color: #565656;
+    margin-bottom: 25px;
+    font-size: 15px;
+}
+
+.pay-btn {
+    background: linear-gradient(45deg,#06b6d4,#3b82f6);
+    border: none;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 14px 26px;
+    font-size: 17px;
+    cursor: pointer;
+    width: 100%;
+    transition: .3s;
+}
+
+.pay-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+@keyframes fadeIn {
+  from {opacity:0;transform:translateY(15px);}
+  to {opacity:1;transform:translateY(0);}
+}
+</style>
+
+<div class="payment-section">
+  <div class="payment-card">
+    <h2>🧾 Pay for Lab Report</h2>
+    <p>Total Amount: <b>₹{{ report.total_price }}</b></p>
+
+    <button id="rzp-button1" class="pay-btn">Pay ₹{{ report.total_price }}</button>
+  </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+var options = {
+    "key": "{{ razorpay_key_id }}",
+    "amount": "{{ report.total_price|floatformat:0 }}00",
+    "currency": "INR",
+    "name": "EHR Lab Test",
+    "description": "Payment for Lab Report",
+    "order_id": "{{ report.razorpay_order_id }}",  // FIXED HERE ✔
+
+    "handler": function (response) {
+        fetch("{% url 'payment_success' %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body:
+                "razorpay_order_id=" + response.razorpay_order_id +
+                "&razorpay_payment_id=" + response.razorpay_payment_id
+        }).then(() => {
+            alert("✅ Payment Successful!");
+            window.location.href = "{% url 'payment_success' %}";
+        });
+    },
+
+    "theme": {"color": "#06b6d4"}
+};
+
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+{% else %}
+
+<style>
+.success-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    font-family: "Poppins", sans-serif;
+}
+.success-msg {
+    background: #d4edda;
+    border: 1px solid #b7e4bb;
+    color: #0f5132;
+    padding: 18px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    animation: fadeIn 0.6s ease-in-out;
+}
+</style>
+
+<div class="success-box">
+ <div class="success-msg">✅ Payment Completed Successfully</div>
+</div>
+
+{% endif %}

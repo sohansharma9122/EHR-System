@@ -1,0 +1,27 @@
+<table border="solid">
+    <tr>
+        <th>Report ID</th>
+        <th>Patient</th>
+        <th>Tests</th>
+        <th>Total Price</th>
+        <th>Date & Time</th>
+    </tr>
+    {% for report in rdata %}
+        <tr>
+            <td>{{report.report_id}}</td>
+            <td>{{report.Patient.Name}}</td>
+            <td>
+                <ul>
+                    {% for test in report.tests.all %}
+                        <li>{{test.test_name}} (₹{{ test.test_Price }})</li>
+                        {% empty %}
+                        <li>No tests</li>
+                     {% endfor %}
+                </ul>
+            </td>
+            <td>₹{{ report.total_Price }}</td>
+            <td>{{report.create_at|date:"d M Y H:i"}}</td>
+        </tr>
+    {% endfor %}
+
+</table>

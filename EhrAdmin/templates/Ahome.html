@@ -1,0 +1,35 @@
+{% extends "alayout/base.html" %}
+{% block adminblock %}
+{% load static %}
+
+<!-- Animate.css for smooth transition -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <!-- Welcome Card -->
+            <div class="card shadow-lg border-0 rounded-4 animate__animated animate__fadeInDown animate__slow">
+                <div class="card-header text-white text-center" 
+                     style="background: linear-gradient(90deg, #36d1dc, #5b86e5);">
+                    <h2 class="mb-0">Welcome to EhrAdmin Dashboard</h2>
+                </div>
+                <div class="card-body text-center p-5" style="background-color: #f8f9fa;">
+                    <p class="lead">
+                        Manage your hospital system efficiently. Access all modules like Doctors, Patients, Staff, and Appointments from the navigation menu.
+                    </p>
+                    <img src="{% static 'images/EhrHome.png' %}" alt="Admin Home" 
+                         class="img-fluid mt-3" style="max-height: 200px;">
+                </div>
+            </div>
+            <!-- End Welcome Card -->
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

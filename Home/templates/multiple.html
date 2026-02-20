@@ -1,0 +1,13 @@
+<form method="post">
+    {% csrf_token %}
+    &nbsp;
+    First number : <input type="text" name="Fno" placeholder="Enter first number"><br><br>&nbsp;
+   
+    Second number : <input type="text" name="Sno" placeholder="Enter second number"><br><br>&nbsp;
+    &nbsp;
+    <input type="submit" name="btn" value="multiple">
+
+</form>
+{% if multi %}
+<h1>Result is {{multi}}</h1>
+{% endif %}

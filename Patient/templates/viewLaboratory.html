@@ -1,0 +1,36 @@
+{% extends "playout/base.html" %}
+{% block patientblock %}
+{% load static %}
+
+<form method="post">
+    {% csrf_token %}
+    <div class="container mt-4">
+        <h3 class="mb-3">Available Tests</h3>
+
+        <table class="table table-bordered table-hover text-center align-middle">
+            <thead class="table-primary">
+                <tr>
+                    <th>Test Name</th>
+                    <th>Test Price (₹)</th>
+                    <th>Select</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in testdata %}
+                <tr>
+                    <td>{{ data.test_name }}</td>
+                    <td>{{ data.test_Price }}</td>
+                    <td>
+                        <input type="checkbox" name="selected_tests" value="{{ data.test_id }}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Submit button below table -->
+        <div class="text-center mt-3">
+            <button type="submit" name="btn" class="btn btn-primary px-4">Submit</button>
+        </div>
+    </div>
+</form>

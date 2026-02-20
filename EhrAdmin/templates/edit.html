@@ -1,0 +1,50 @@
+
+{% extends "alayout/base.html" %}
+{% block adminblock %}
+{% load static %}
+<form method="post" action="{% url 'update' %}" class="p-4 shadow-lg rounded bg-gradient w-75 mx-auto" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white;">
+    {% csrf_token %}
+
+    <h3 class="text-center mb-4">Update Profile</h3>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Name</label>
+        <input type="text" class="form-control" name="name" value="{{user.Name}}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Email</label>
+        <input type="email" class="form-control" name="email" value="{{user.Email}}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Mobile</label>
+        <input type="text" class="form-control" name="mobile" value="{{user.Mobile}}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Gender</label>
+        <select class="form-select" name="gender">
+            <option value="Male" {% if user.Gender == "Male" %}selected{% endif %}>Male</option>
+            <option value="Female" {% if user.Gender == "Female" %}selected{% endif %}>Female</option>
+            <option value="Other" {% if user.Gender == "Other" %}selected{% endif %}>Other</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Address</label>
+        <textarea class="form-control" name="address" rows="2">{{user.Address}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label fw-bold">Status</label>
+        <input type="text" class="form-control" name="status" value="{{user.Status}}">
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-warning px-4 fw-bold shadow">Update</button>
+    </div>
+</form>
+
+{% endblock %}
+

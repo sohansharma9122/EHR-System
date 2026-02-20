@@ -1,0 +1,129 @@
+{% extends "dlayout/base.html" %}
+{% block doctorblock %}
+{% load static %}
+<style>
+/* Container */
+.user-table-wrapper {
+    width: 95%;
+    margin: 35px auto;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Page Title */
+.page-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #0d47a1;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Table Wrapper */
+.table-container {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 14px;
+    backdrop-filter: blur(12px);
+    padding: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Table style */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Segoe UI", sans-serif;
+}
+
+thead tr {
+    background: linear-gradient(45deg, #007bff, #0d47a1);
+    color: white;
+}
+
+thead th {
+    padding: 14px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tbody td {
+    padding: 12px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2c3e50;
+    background: rgba(255,255,255,0.95);
+}
+
+/* Hover effect row */
+tbody tr {
+    transition: 0.25s;
+}
+
+tbody tr:hover {
+    background: #e8f0ff;
+    transform: scale(1.01);
+    box-shadow: 0 0 10px rgba(0, 92, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    table {
+        font-size: 13px;
+    }
+    thead th {
+        font-size: 11px;
+    }
+    .page-title {
+        font-size: 24px;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    0%   { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+
+<div class="user-table-wrapper">
+    <h2 class="page-title">👤 Registered Users</h2>
+
+    <div class="table-container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Reg ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Gender</th>
+                        <th>DOB</th>
+                        <th>Role</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for user in data %}
+                    <tr>
+                        <td><b>{{ user.reg_id }}</b></td>
+                        <td>{{ user.Name }}</td>
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.Mobile }}</td>
+                        <td>{{ user.Gender }}</td>
+                        <td>{{ user.DOB }}</td>
+                        <td><span style="color:#0d47a1; font-weight:600;">{{ user.Role_Name }}</span></td>
+                        <td>{{ user.Address }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

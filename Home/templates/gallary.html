@@ -1,0 +1,89 @@
+{% extends "layout/base.html" %}
+{% block homeblock %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EHR Gallery</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .gallery-img {
+            border-radius: 8px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .gallery-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .caption {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+        .gallery-container {
+            padding: 40px 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container container">
+        <h1>EHR System Gallery</h1>
+        <div class="row g-4">
+            <!-- Login Page -->
+            <div class="col-md-4 col-sm-6">
+                <img src="{% static 'images/login_page.jpg' %}" class="img-fluid gallery-img" alt="Login Page">
+                <div class="caption">Secure login page for doctors, nurses, and patients.</div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="col-md-4 col-sm-6">
+                <img src="{% static 'images/dashboard.jpg' %}" class="img-fluid gallery-img" alt="Dashboard">
+                <div class="caption">Dashboard showing patient summary and upcoming appointments.</div>
+            </div>
+
+            <!-- Patient Record View -->
+            <div class="col-md-4 col-sm-6">
+                <img src="{% static 'images/patient_record.jpg' %}" class="img-fluid gallery-img" alt="Patient Record">
+                <div class="caption">View and manage patient medical history, prescriptions, and test results.</div>
+            </div>
+
+            <!-- Appointment Scheduling -->
+            <div class="col-md-4 col-sm-6">
+                <img src="{% static 'images/appointment.jpg' %}" class="img-fluid gallery-img" alt="Appointment Scheduling">
+                <div class="caption">Easily schedule, reschedule, or cancel patient appointments.</div>
+            </div>
+
+            <!-- Reports/Analytics -->
+            <div class="col-md-4 col-sm-6">
+                <img src="{% static 'images/reports.jpg' %}" class="img-fluid gallery-img" alt="Reports and Analytics">
+                <div class="caption">Visualize patient data and system analytics for better decision-making.</div>
+            </div>
+
+            <!-- Optional Before & After -->
+            <div class="col-md-4 col-sm-6">
+                <img src="{% static 'images/before_after.jpg' %}" class="img-fluid gallery-img" alt="Before and After">
+                <div class="caption">Before and after improvement: optimized patient record layout.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+{% endblock %}

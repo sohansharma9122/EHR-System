@@ -1,0 +1,82 @@
+{% extends "playout/base.html" %}
+{% load static %}
+
+{% block patientblock %}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <!-- Search Card -->
+            <div class="card shadow-lg border-0 rounded-4 mt-5" id="searchCard" style="opacity: 0; transform: translateY(50px); transition: all 0.8s ease;">
+                <div class="card-header bg-primary text-white text-center rounded-top-4">
+                    <h4 class="mb-0">🔍 Search Appointment</h4>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="post" class="d-flex justify-content-center gap-2">
+                        {% csrf_token %}
+                        <input type="text" class="form-control w-50" name="pmobile" placeholder="Enter your mobile number" required>
+                        <button type="submit" class="btn btn-success px-4">Search</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            {% if msg %}
+            <div class="card mt-4 shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-hover text-center align-middle">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Doctor Name</th>
+                                <th>Disease</th>
+                                <th>Apply Date</th>
+                                <th>Time Slot</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for appointment in msg %}
+                            <tr>
+                                <td>{{ appointment.doct_name }}</td>
+                                <td>{{ appointment.p_desease }}</td>
+                                <td>{{ appointment.todaydate }}</td>
+                                <td>{{ appointment.fromTime }} - {{ appointment.toTime }}</td>
+                                <td>
+                                    {% if appointment.status == "Approved" %}
+                                        <span class="badge bg-success">Approved</span>
+                                    {% elif appointment.status == "Pending" %}
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    {% else %}
+                                        <span class="badge bg-danger">Rejected</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {% elif searched %}
+            <div class="alert alert-danger mt-4 text-center" role="alert">
+                No Match Found
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Smooth fade-in transition script -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const card = document.getElementById("searchCard");
+        setTimeout(() => {
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0)";
+        }, 200);
+    });
+</script>
+
+{% endblock %}

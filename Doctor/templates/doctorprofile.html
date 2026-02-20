@@ -1,0 +1,22 @@
+<form method="post" enctype="multipart/form-data" action="{% url 'Doctorprofile' %}">
+    {% csrf_token %}
+    name <input type="text" name="name" value="{{ddata.Name}}"><br>
+    email <input type="email" name="email" value="{{ddata.Email}}"><br>
+    mobile <input type="text" name="mobile" value="{{ddata.Mobile}}"><br>
+    password <input type="text" name="pwd" value="{{ddata.Password}}"><br>
+    address <input type="text" name="ads" value="{{ddata.Address}}"><br>
+    dob <input type="text" name="dob" value="{{ddata.DOB | date:'Y-m-d'}}"><br>
+    gender <input type="text" name="gender" value="{{ddata.Gender}}"><br>
+    Image <input type="file" name="image"><br>
+    document <input type="file" name="uploaded_doc"><br>
+    <label for="designation">Designation:</label>
+    <select name="designation" id="designation">
+        <option value="general">General physician</option>
+        <option value="pediatrician">Pediatrician</option>
+        <option value="surgeon">Surgeon</option>
+        <option value="cardiologist">Cardiologist</option>
+        <option value="dermatologist">Dermatologist</option>
+    </select><br>
+
+    <input type="submit" value="update" name="btn">
+</form>

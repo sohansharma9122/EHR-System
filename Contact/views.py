@@ -11,9 +11,9 @@ def Contact(request):
 
         ob=Contact_Master.objects.create(Name=UserName,Mobile=mobile,Email=email,Feedback=feedback)
         ob.save()
-        return render(request,"Contact_Details.html",{"MSG": "Feedback submitted successful...."})
+        return render(request,"contact_details.html",{"MSG": "Feedback submitted successful...."})
 
 
-    return render(request,"Contact_Details.html")
+    return render(request,"contact_details.html")
 
 

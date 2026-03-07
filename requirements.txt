@@ -1,0 +1,5 @@
+Django==5.2.3
+django_environ==0.12.0
+razorpay==2.0.0
+xhtml2pdf==0.2.17
+gunicorn==25.1.0
